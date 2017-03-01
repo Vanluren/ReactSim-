@@ -16,7 +16,7 @@ class App extends Component {
       selectedVideo: null
     };
 
-    this.videoSearch('surfboards');
+    this.videoSearch('');
   }
 
   videoSearch(term) {
@@ -29,15 +29,19 @@ class App extends Component {
   }
 
   render() {
-    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+    const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 500);
 
     return (
       <div>
-        <SearchBar onSearchTermChange={videoSearch} />
-        <VideoDetail video={this.state.selectedVideo} />
-        <VideoList
-          onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
-          videos={this.state.videos} />
+        <div className="row">
+          <SearchBar onSearchTermChange={videoSearch} />
+        </div>
+        <div className="row">
+          <VideoDetail video={this.state.selectedVideo} />
+          <VideoList
+            onVideoSelect={selectedVideo => this.setState({selectedVideo}) }
+            videos={this.state.videos} />
+        </div>
       </div>
     );
   }
